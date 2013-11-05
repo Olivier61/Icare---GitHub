@@ -1,0 +1,108 @@
+﻿##RBvx-PrjVaultItem#2# - <http://www.tempel.org/Arbed/>
+##OrigFileName:icare.xojo_binary_project
+##VaultHdrEnd#
+##Format:2#
+pWPg/B: 426C6F6B705750673C8AA2E10000000000000000000000000000000000000000
+ Name/S: ccGauge
+ Cont/N: 0
+ pasw/S: 
+ bCls/N: 1
+ Supr/S: WebContainer
+ flag/N: 1
+ bNtr/N: 0
+ Comp/S: 
+ HIns/G: 
+  name/S: Shown
+  Comp/S: 
+  Vsbl/N: 1
+  sorc/d: (Enco/N: 134217984
+		Sub Shown()
+			'txtProgress.Text = "Notre objectif est " + str(Session.totBudget) + " € "
+			'txtProgress.HorizontalCenter = self.Width / 2
+			'
+			'pbPromesses.Value = Session.totPromesse
+			'
+			'txtTotal.Text = " et nous en sommes à " + str(Session.totPromesse) + " €"
+			'txtTotal.HorizontalCenter = self.Width / 2
+			
+		End Sub
+  )
+ HIns/g: 
+ PDef/D: (name/S: Style, type/S: String, visi/N: 1, Enco/N: 134217984, PVal/S: None)
+ PDef/D: (name/S: _VerticalPercent, type/S: Double, visi/N: 0, PVal/S: 0.0)
+ PDef/D: (name/S: _ShownEventFired, type/S: Boolean, visi/N: 0, PVal/S: False)
+ PDef/D: (name/S: _OpenEventFired, type/S: Boolean, visi/N: 0, PVal/S: False)
+ PDef/D: (name/S: _OfficialControl, type/S: Boolean, visi/N: 0, PVal/S: False)
+ PDef/D: (name/S: _NeedsRendering, type/S: Boolean, visi/N: 0, PVal/S: True)
+ PDef/D: (name/S: _Locked, type/S: Boolean, visi/N: 0, PVal/S: False)
+ PDef/D: (name/S: _IsEmbedded, type/S: Boolean, visi/N: 0, PVal/S: False)
+ PDef/D: (name/S: _HorizontalPercent, type/S: Double, visi/N: 0, PVal/S: 0.0)
+ PDef/D: (name/S: ZIndex, type/S: Integer, visi/N: 0, PVal/N: 1)
+ PDef/D: (name/S: Visible, type/S: Boolean, visi/N: 1, PVal/S: True)
+ PDef/D: (name/S: VerticalCenter, type/S: Integer, visi/N: 0, PVal/N: 0)
+ PDef/D: (name/S: Top, type/S: Integer, visi/N: 1, PVal/N: 0)
+ PDef/D: (name/S: TabOrder, type/S: Integer, visi/N: 1, PVal/N: 0)
+ PDef/D: (name/S: LockVertical, type/S: Boolean, visi/N: 0, PVal/S: False)
+ PDef/D: (name/S: LockTop, type/S: Boolean, visi/N: 1, PVal/S: True)
+ PDef/D: (name/S: LockRight, type/S: Boolean, visi/N: 1, PVal/S: False)
+ PDef/D: (name/S: LockLeft, type/S: Boolean, visi/N: 1, PVal/S: True)
+ PDef/D: (name/S: LockHorizontal, type/S: Boolean, visi/N: 0, PVal/S: False)
+ PDef/D: (name/S: LockBottom, type/S: Boolean, visi/N: 1, PVal/S: False)
+ PDef/D: (name/S: Left, type/S: Integer, visi/N: 1, PVal/N: 0)
+ PDef/D: (name/S: Index, type/S: Integer, visi/N: 1, PVal/N: -2147483648)
+ PDef/D: (name/S: HorizontalCenter, type/S: Integer, visi/N: 0, PVal/N: 0)
+ PDef/D: (name/S: HelpTag, type/S: String, visi/N: 0, Enco/N: 1536, PVal/S: )
+ PDef/D: (name/S: Enabled, type/S: Boolean, visi/N: 1, PVal/S: True)
+ PDef/D: (name/S: Cursor, type/S: Integer, visi/N: 1, PVal/N: 0)
+ PDef/D: (name/S: Height, type/S: Integer, visi/N: 1, PVal/N: 106)
+ PDef/D: (name/S: Width, type/S: Integer, visi/N: 1, PVal/N: 300)
+ VwBh/G: 
+  VwPr/G: 
+   Name/S: Cursor
+   Vsbl/N: 1
+   PrGp/S: Behavior
+   PVal/S: 0
+   type/S: Integer
+   vbET/S: Enum
+   Enum/D: (defn/S: 0 - Auto, defn/S: 1 - Standard Pointer, defn/S: 2 - Finger Pointer, defn/S: 3 - IBeam, defn/S: 4 - Wait, defn/S: 5 - Help, defn/S: 6 - Arrow All Directions, defn/S: 7 - Arrow North, defn/S: 8 - Arrow South, defn/S: 9 - Arrow East, defn/S: 10 - Arrow West, defn/S: 11 - Arrow North East, defn/S: 12 - Arrow North West, defn/S: 13 - Arrow South East, defn/S: 14 - Arrow South West, defn/S: 15 - Splitter East West, defn/S: 16 - Splitter North South, defn/S: 17 - Progress, defn/S: 18 - No Drop, defn/S: 19 - Not Allowed, defn/S: 20 - Vertical IBeam, defn/S: 21 - Crosshair)
+  VwPr/g: 
+  VwPr/D: (Name/S: Enabled, Vsbl/N: 1, PrGp/S: Behavior, PVal/S: True, type/S: Boolean)
+  VwPr/D: (Name/S: Height, Vsbl/N: 1, PrGp/S: Behavior, PVal/S: 300, type/S: Integer)
+  VwPr/D: (Name/S: HelpTag, Vsbl/N: 1, PrGp/S: Behavior, type/S: String, vbET/S: MultiLineEditor)
+  VwPr/D: (Name/S: HorizontalCenter, PrGp/S: Behavior, type/S: Integer)
+  VwPr/D: (Name/S: Index, Vsbl/N: 1, PrGp/S: ID, PVal/S: -2147483648, type/S: Integer)
+  VwPr/D: (Name/S: Left, Vsbl/N: 1, PrGp/S: Position, PVal/S: 0, type/S: Integer)
+  VwPr/D: (Name/S: LockBottom, Vsbl/N: 1, PrGp/S: Behavior, PVal/S: False, type/S: Boolean)
+  VwPr/D: (Name/S: LockHorizontal, Vsbl/N: 1, PrGp/S: Behavior, PVal/S: False, type/S: Boolean)
+  VwPr/D: (Name/S: LockLeft, Vsbl/N: 1, PrGp/S: Behavior, PVal/S: True, type/S: Boolean)
+  VwPr/D: (Name/S: LockRight, Vsbl/N: 1, PrGp/S: Behavior, PVal/S: False, type/S: Boolean)
+  VwPr/D: (Name/S: LockTop, Vsbl/N: 1, PrGp/S: Behavior, PVal/S: True, type/S: Boolean)
+  VwPr/D: (Name/S: LockVertical, Vsbl/N: 1, PrGp/S: Behavior, PVal/S: False, type/S: Boolean)
+  VwPr/D: (Name/S: Name, Vsbl/N: 1, PrGp/S: ID, type/S: String)
+  VwPr/G: 
+   Name/S: ScrollbarsVisible
+   Vsbl/N: 1
+   PrGp/S: Behavior
+   PVal/S: 0
+   type/S: Integer
+   vbET/S: Enum
+   Enum/D: (defn/S: 0 - Automatic, defn/S: 1 - Always, defn/S: 2 - Never)
+  VwPr/g: 
+  VwPr/D: (Name/S: Super, Vsbl/N: 1, PrGp/S: ID, type/S: String)
+  VwPr/D: (Name/S: TabOrder, Vsbl/N: 1, PrGp/S: Behavior, PVal/S: 0, type/S: Integer)
+  VwPr/D: (Name/S: Top, Vsbl/N: 1, PrGp/S: Position, PVal/S: 0, type/S: Integer)
+  VwPr/D: (Name/S: VerticalCenter, PrGp/S: Behavior, type/S: Integer)
+  VwPr/D: (Name/S: Visible, Vsbl/N: 1, PrGp/S: Behavior, PVal/S: True, type/S: Boolean)
+  VwPr/D: (Name/S: Width, Vsbl/N: 1, PrGp/S: Behavior, PVal/S: 300, type/S: Integer)
+  VwPr/D: (Name/S: ZIndex, PrGp/S: Behavior, PVal/S: 1, type/S: Integer)
+  VwPr/D: (Name/S: _HorizontalPercent, PrGp/S: Behavior, type/S: Double)
+  VwPr/D: (Name/S: _IsEmbedded, PrGp/S: Behavior, type/S: Boolean)
+  VwPr/D: (Name/S: _Locked, PrGp/S: Behavior, type/S: Boolean)
+  VwPr/D: (Name/S: _NeedsRendering, PrGp/S: Behavior, PVal/S: True, type/S: Boolean)
+  VwPr/D: (Name/S: _OfficialControl, PrGp/S: Behavior, PVal/S: False, type/S: Boolean)
+  VwPr/D: (Name/S: _OpenEventFired, PrGp/S: Behavior, type/S: Boolean)
+  VwPr/D: (Name/S: _ShownEventFired, PrGp/S: Behavior, type/S: Boolean)
+  VwPr/D: (Name/S: _VerticalPercent, PrGp/S: Behavior, type/S: Double)
+ VwBh/g: 
+pWPg/b: 
+##RBvx-End#

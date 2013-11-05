@@ -1,0 +1,18 @@
+Cher/Chère %nom%,
+
+
+Le %date% dernier vous nous avez aimablement fait une promesse de don pour un montant de  %montant%.
+
+Sauf erreur de notre part, nous n'avons pas encore reçu le règlement de votre don.
+
+Nous espérons que vous pourrez concrétiser cette promesse et vous invitons à faire le versement en utilisant les indications suivantes:
+
+Montant.......: %montant%
+Bénéficiaire..: %beneficiaire%
+IBAN..........: %iban%
+BIC...........: %bic%
+Communication.: %communication%
+
+Bien à vous,
+
+La Compagnie Hêtre Urbain

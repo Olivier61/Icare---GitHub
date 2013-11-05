@@ -1,0 +1,53 @@
+﻿##RBvx-PrjVaultItem#2# - <http://www.tempel.org/Arbed/>
+##OrigFileName:icare.xojo_binary_project
+##OrigFormat:1
+##OrigHeader:526242460000000200000000000000000000001C000000000132DC40
+##MacType,Creator:RbBF,RBv2
+##Project Items:	
+#	Proj	00000000
+#App	pObj	1D6D9577
+#Session	pWSe	1704AFBB
+#Database	pFol	4EC7CC5A
+#Main	pWPg	34AD6B71
+#Admin	pWPg	11907DB2
+#Build Automation	BSts	65692461
+#dialogPromesse	pWPg	15E33232
+#dialogPayment	pWPg	2D4A9F06
+#dialogMerci	pWPg	2605B99C
+#dialogAdmin	pWPg	30850F36
+#Linux	Bsls	59D3D1F0
+#Build	BSbu	617C5348
+#Mac OS X	Bsls	29400F9E
+#Build	BSbu	2CC1A4E0
+#Windows	Bsls	5D2FC6BA
+#Build	BSbu	6BA04EC7
+#affiche	pPic	699463AA
+#ccPromesse	pWPg	55DF1DE4
+#ccPayment	pWPg	59CF2030
+#dbIcare	pObj	753D426E
+#ccParam	pWPg	2C484732
+#ccListPayements	pWPg	1BDA3AA7
+#ccListPromesses	pWPg	4699DBBC
+#ccListRappels	pWPg	0F36D79A
+#ccGauge	pWPg	3C8AA2E1
+#ccTables	pWPg	73659D10
+#ccTitle	pWPg	43722FDB
+#ccSubTitle	pWPg	281E0E0D
+#ccFooter	pWPg	5E193EB8
+#style_TransBackground	pWSt	4D2AF393
+#style_textAlignRight	pWSt	419F1334
+#style_textAlignCenter	pWSt	32A61E3A
+#style_textAlignCenter1	pWSt	756EA726
+#style_TextColor_Red	pWSt	5FF6DBC6
+#style_Footer	pWSt	2C138388
+#style_Title	pWSt	7DA4371A
+#style_SubTitle	pWSt	38754DA7
+#style_Button_Big	pWSt	1D472142
+#style_WebViewer	pWSt	1D687148
+#mailmerci	pTxt	5DD2A653
+#MailPaye	pTxt	30A604EA
+#mailrappel	pTxt	638CF93F
+#	pUIs	00000000
+##External Files:	
+##VaultHdrEnd#
+##RBvx-End#

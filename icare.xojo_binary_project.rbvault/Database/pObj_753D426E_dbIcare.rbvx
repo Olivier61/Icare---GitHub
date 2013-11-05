@@ -1,0 +1,248 @@
+﻿##RBvx-PrjVaultItem#2# - <http://www.tempel.org/Arbed/>
+##OrigFileName:icare.xojo_binary_project
+##VaultHdrEnd#
+##Format:2#
+pObj/B: 426C6F6B704F626A753D426E0000000000000000000000000000000000000000
+ Name/S: dbIcare
+ Cont/N: 1321716826
+ pasw/S: 
+ bCls/N: 1
+ Supr/S: SQLiteDatabase
+ flag/N: 1
+ bNtr/N: 0
+ Comp/S: 
+ Meth/G: 
+  name/S: getPromesses
+  Comp/S: 
+  Vsbl/N: 1
+  Enco/N: 134217984
+  Alas/S: 
+  flag/N: 0
+  shrd/N: 0
+  parm/S: 
+  rslt/S: RecordSet
+  sorc/d: (Enco/N: 134217984
+		Function getPromesses() As RecordSet
+			Dim sql As String = "SELECT * FROM Promesse ORDER BY ID DESC"
+			
+			Dim rs As RecordSet
+			rs = Self.SQLSelect(sql)
+			
+			Return rs
+		End Function
+  )
+ Meth/g: 
+ Meth/G: 
+  name/S: OpenDB
+  Comp/S: 
+  Vsbl/N: 1
+  Enco/N: 134217984
+  Alas/S: 
+  flag/N: 0
+  shrd/N: 1
+  parm/S: 
+  rslt/S: dbIcare
+  sorc/G: 
+   Enco/N: 134217984
+   srcl/S:  Shared Function OpenDB() As dbIcare
+   srcl/S: 
+   srcl/S: Dim dbFile As FolderItem
+   srcl/S: 'dbFile = GetFolderItem("icare.sqlite")
+   srcl/S: 
+   srcl/S: #if DebugBuild then
+   srcl/S: dbFile = GetFolderItem("").Parent.Child("icare.sqlite")
+   srcl/S: #else
+   srcl/S: dbFile = GetFolderItem("").Child("icare.sqlite")
+   srcl/S: #endif
+   srcl/S: 
+   srcl/S: Dim db As New dbIcare
+   srcl/S: If dbFile.Exists Then
+   srcl/S: db.DatabaseFile = dbFile
+   srcl/S: If db.Connect Then
+   srcl/S: 'MsgBox("db Connected")
+   srcl/S: else
+   srcl/S: MsgBox("Erreur: " + db.ErrorMessage)
+   srcl/S: End If
+   srcl/S: else
+   srcl/S: MsgBox("icare.sqlite not found")
+   srcl/S: End if
+   srcl/S: 
+   srcl/S: Return db
+   srcl/S: 
+   srcl/S: 
+   srcl/S: 
+   srcl/S: End Function
+  sorc/g: 
+ Meth/g: 
+ Meth/G: 
+  name/S: getProjet
+  Comp/S: 
+  Vsbl/N: 1
+  Enco/N: 134217984
+  Alas/S: 
+  flag/N: 0
+  shrd/N: 0
+  parm/S: 
+  rslt/S: RecordSet
+  sorc/d: (Enco/N: 134217984
+		Function getProjet() As RecordSet
+			Dim sql As String = "SELECT * FROM Projet"
+			
+			Dim rs As RecordSet
+			rs = Self.SQLSelect(sql)
+			
+			Return rs
+		End Function
+  )
+ Meth/g: 
+ Meth/G: 
+  name/S: BeginTransaction
+  Comp/S: 
+  Vsbl/N: 1
+  Enco/N: 134217984
+  Alas/S: 
+  flag/N: 0
+  shrd/N: 0
+  parm/S: 
+  rslt/S: 
+  sorc/d: (Enco/N: 134217984
+		Sub BeginTransaction()
+			Self.SQLExecute("BEGIN TRANSACTION")
+		End Sub
+  )
+ Meth/g: 
+ Meth/G: 
+  name/S: EndTransaction
+  Comp/S: 
+  Vsbl/N: 1
+  Enco/N: 134217984
+  Alas/S: 
+  flag/N: 0
+  shrd/N: 0
+  parm/S: 
+  rslt/S: 
+  sorc/d: (Enco/N: 134217984
+		Sub EndTransaction()
+			Self.Commit
+		End Sub
+  )
+ Meth/g: 
+ Meth/G: 
+  name/S: CancelTransaction
+  Comp/S: 
+  Vsbl/N: 1
+  Enco/N: 134217984
+  Alas/S: 
+  flag/N: 0
+  shrd/N: 0
+  parm/S: 
+  rslt/S: 
+  sorc/d: (Enco/N: 134217984
+		Sub CancelTransaction()
+			Self.Rollback
+		End Sub
+  )
+ Meth/g: 
+ Meth/G: 
+  name/S: getPromesseID
+  Comp/S: 
+  Vsbl/N: 1
+  Enco/N: 134217984
+  Alas/S: 
+  flag/N: 0
+  shrd/N: 0
+  parm/S: ID As String
+  rslt/S: RecordSet
+  sorc/d: (Enco/N: 134217984
+		Function getPromesseID(ID As String) As RecordSet
+			Dim stmt As SQLitePreparedStatement = Self.Prepare("SELECT * FROM Promesse WHERE ID=? ORDER BY ID " ) 
+			stmt.BindType(0, SQLitePreparedStatement.SQLITE_INTEGER)
+			stmt.Bind(0, ID)
+			
+			Dim rs As RecordSet = stmt.SQLSelect
+			
+			Return rs
+		End Function
+  )
+ Meth/g: 
+ Meth/G: 
+  name/S: GetInvoiceItemsForInvoice
+  Comp/S: 
+  Vsbl/N: 1
+  Enco/N: 134217984
+  Alas/S: 
+  flag/N: 0
+  shrd/N: 0
+  parm/S: invoiceNum As String
+  rslt/S: RecordSet
+  sorc/d: (Enco/N: 134217984
+		Function GetInvoiceItemsForInvoice(invoiceNum As String) As RecordSet
+			Dim stmt As SQLitePreparedStatement = Self.Prepare("SELECT * FROM InvoiceItems INNER JOIN Products ON Products.Code = InvoiceItems.ProductCode WHERE InvoiceNo=?")
+			stmt.BindType(0, SQLitePreparedStatement.SQLITE_INTEGER)
+			stmt.Bind(0, invoiceNum)
+			
+			Dim rs As RecordSet = stmt.SQLSelect
+			
+			Return rs
+		End Function
+  )
+ Meth/g: 
+ Meth/G: 
+  name/S: getPromesseName
+  Comp/S: 
+  Vsbl/N: 1
+  Enco/N: 134217984
+  Alas/S: 
+  flag/N: 0
+  shrd/N: 0
+  parm/S: Name As String
+  rslt/S: RecordSet
+  sorc/d: (Enco/N: 134217984
+		Function getPromesseName(Name As String) As RecordSet
+			Dim stmt As SQLitePreparedStatement = Self.Prepare("SELECT * FROM Promesse WHERE Nom LIKE ? ORDER BY Nom ")
+			stmt.BindType(0, SQLitePreparedStatement.SQLITE_TEXT)
+			stmt.Bind(0, "%"+name+"%")
+			
+			Dim rs As RecordSet = stmt.SQLSelect
+			
+			Return rs
+		End Function
+  )
+ Meth/g: 
+ Meth/G: 
+  name/S: getPayements
+  Comp/S: 
+  Vsbl/N: 1
+  Enco/N: 134217984
+  Alas/S: 
+  flag/N: 0
+  shrd/N: 0
+  parm/S: 
+  rslt/S: RecordSet
+  sorc/d: (Enco/N: 134217984
+		Function getPayements() As RecordSet
+			Dim sql As String = "SELECT * FROM Payement ORDER BY ID DESC"
+			
+			Dim rs As RecordSet
+			rs = Self.SQLSelect(sql)
+			
+			Return rs
+		End Function
+  )
+ Meth/g: 
+ VwBh/G: 
+  VwPr/D: (Name/S: DatabaseFile, Vsbl/N: 1, type/S: FolderItem, vbET/S: FolderItem)
+  VwPr/D: (Name/S: DebugMode, Vsbl/N: 1, type/S: Boolean, vbET/S: Boolean)
+  VwPr/D: (Name/S: EncryptionKey, Vsbl/N: 1, type/S: String, vbET/S: String)
+  VwPr/D: (Name/S: Index, Vsbl/N: 1, PrGp/S: ID, type/S: Integer)
+  VwPr/D: (Name/S: Left, Vsbl/N: 1, PrGp/S: Position, type/S: Integer)
+  VwPr/D: (Name/S: MultiUser, Vsbl/N: 1, type/S: Boolean, vbET/S: Boolean)
+  VwPr/D: (Name/S: Name, Vsbl/N: 1, PrGp/S: ID, type/S: String)
+  VwPr/D: (Name/S: ShortColumnNames, Vsbl/N: 1, type/S: Boolean, vbET/S: Boolean)
+  VwPr/D: (Name/S: Super, Vsbl/N: 1, PrGp/S: ID, type/S: String)
+  VwPr/D: (Name/S: ThreadYieldInterval, Vsbl/N: 1, type/S: Integer, vbET/S: Integer)
+  VwPr/D: (Name/S: Timeout, Vsbl/N: 1, type/S: Double, vbET/S: Double)
+  VwPr/D: (Name/S: Top, Vsbl/N: 1, PrGp/S: Position, type/S: Integer)
+ VwBh/g: 
+pObj/b: 
+##RBvx-End#

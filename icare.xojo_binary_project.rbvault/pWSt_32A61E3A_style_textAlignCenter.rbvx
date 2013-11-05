@@ -1,0 +1,27 @@
+﻿##RBvx-PrjVaultItem#2# - <http://www.tempel.org/Arbed/>
+##OrigFileName:icare.xojo_binary_project
+##VaultHdrEnd#
+##Format:2#
+pWSt/B: 426C6F6B7057537432A61E3A0000000000000000000000000000000000000000
+ Name/S: style_textAlignCenter
+ Cont/N: 0
+ pasw/S: 
+ bCls/N: 1
+ Supr/S: WebStyle
+ flag/N: 1
+ bNtr/N: 0
+ Comp/S: 
+ VwBh/G: 
+  VwPr/D: (Name/S: Index, Vsbl/N: 1, PrGp/S: ID, PVal/S: -2147483648, type/S: Integer)
+  VwPr/D: (Name/S: Left, Vsbl/N: 1, PrGp/S: Position, PVal/S: 0, type/S: Integer)
+  VwPr/D: (Name/S: Name, Vsbl/N: 1, PrGp/S: ID, type/S: String)
+  VwPr/D: (Name/S: Super, Vsbl/N: 1, PrGp/S: ID, type/S: String)
+  VwPr/D: (Name/S: Top, Vsbl/N: 1, PrGp/S: Position, PVal/S: 0, type/S: Integer)
+  VwPr/D: (Name/S: _Locked, PrGp/S: Behavior, type/S: Boolean)
+ VwBh/g: 
+ WSSG/D: (WSSI/N: 0, WSSD/S: text-align\center)
+ WSSG/D: (WSSI/N: 1)
+ WSSG/D: (WSSI/N: 2)
+ WSSG/D: (WSSI/N: 3)
+pWSt/b: 
+##RBvx-End#

@@ -1,0 +1,17 @@
+Cher/Chère %nom%,
+
+
+Nous vous remercions chaleureusement pour votre promesse de don de  %montant% €.
+
+
+Nous espérons que vous pourrez concrétiser cette promesse et vous invitons à faire le versement en utilisant les indications suivantes:
+
+Montant.......: %montant% €
+Bénéficiaire..: %beneficiaire%
+IBAN..........: %iban%
+BIC...........: %bic%
+Communication.: %communication%
+
+Bien à vous,
+
+La Compagnie Hêtre Urbain

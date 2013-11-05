@@ -1,0 +1,47 @@
+﻿##RBvx-PrjVaultItem#2# - <http://www.tempel.org/Arbed/>
+##OrigFileName:icare.xojo_binary_project
+##VaultHdrEnd#
+##Format:2#
+pObj/B: 426C6F6B704F626A1D6D95770000000000000000000000000000000000000000
+ Name/S: App
+ Cont/N: 0
+ pasw/S: 
+ bCls/N: 1
+ Supr/S: WebApplication
+ flag/N: 1
+ bNtr/N: 0
+ bApO/N: 1
+ Comp/S: 
+ HIns/G: 
+  name/S: Open
+  Comp/S: 
+  Vsbl/N: 1
+  sorc/d: (Enco/N: 134217984
+		Sub Open()
+			mailServer = New SMTPSecureSocket
+			mailServer.Address = "smtp.gmail.com"
+			mailServer.Port = 465
+			mailServer.Username = "olivier.colard@gmail.com"
+			mailServer.Password = "Sema@1409"
+			mailServer.ConnectionType = SMTPSecureSocket.SSLv23
+			mailServer.Secure = True
+			
+		End Sub
+  )
+ HIns/g: 
+ Prop/G: 
+  name/S: mailServer
+  Comp/S: 
+  Vsbl/N: 1
+  Enco/N: 134217984
+  decl/S: mailServer As SMTPSecureSocket
+  flag/N: 0
+  shrd/N: 0
+  sorc/d: (Enco/N: 134217984
+		mailServer As SMTPSecureSocket
+  )
+ Prop/g: 
+ PDef/D: (name/S: MenuBar, type/S: Integer, visi/N: 1, PVal/N: 0)
+ VwBh/D: ()
+pObj/b: 
+##RBvx-End#

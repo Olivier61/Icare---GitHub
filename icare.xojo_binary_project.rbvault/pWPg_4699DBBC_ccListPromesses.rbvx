@@ -1,0 +1,591 @@
+﻿##RBvx-PrjVaultItem#2# - <http://www.tempel.org/Arbed/>
+##OrigFileName:icare.xojo_binary_project
+##VaultHdrEnd#
+##Format:2#
+pWPg/B: 426C6F6B705750674699DBBC0000000000000000000000000000000000000000
+ Name/S: ccListPromesses
+ Cont/N: 0
+ pasw/S: 
+ bCls/N: 1
+ Supr/S: WebContainer
+ flag/N: 1
+ bNtr/N: 0
+ Comp/S: 
+ HIns/G: 
+  name/S: Shown
+  Comp/S: 
+  Vsbl/N: 1
+  sorc/d: (Enco/N: 134217984
+		Sub Shown()
+			
+			Dim rs As RecordSet
+			
+			rs = Session.db.getPromesses
+			
+			listProm(rs)
+		End Sub
+  )
+ HIns/g: 
+ Meth/G: 
+  name/S: listProm
+  Comp/S: 
+  Vsbl/N: 1
+  Enco/N: 134217984
+  Alas/S: 
+  flag/N: 0
+  shrd/N: 0
+  parm/S: rs As RecordSet
+  rslt/S: 
+  sorc/d: (Enco/N: 134217984
+		Sub listProm(rs As RecordSet)
+			lbProm.ListIndex = -1
+			lbProm.DeleteAllRows
+			
+			lbProm.ColumnStyle(2) = style_textAlignRight
+			lbProm.ColumnStyle(6) = style_textAlignRight
+			
+			Dim id, nom, montant, paye, mail, anonyme, date As string
+			
+			If rs <> Nil Then
+				For i As Integer = 1 To rs.RecordCount
+					
+					id = str(rs.Field("ID").StringValue)
+					nom = str(rs.Field("Nom").StringValue)
+					montant = str(rs.Field("Montant").StringValue) + " €  "
+					mail = str(rs.Field("Mail").StringValue)
+					if rs.Field("Anonyme").BooleanValue then
+						anonyme = "oui"
+					else
+						anonyme = ""
+					end if
+					if rs.Field("Date").DateValue <> Nil then
+						date = str(rs.Field("Date").DateValue.AbbreviatedDate)
+					else
+						date = ""
+					end if
+					paye = str(rs.Field("MontantPaye").StringValue) + " €  "
+					
+					
+					lbProm.AddRow(id, nom, montant, mail, anonyme, date, paye)
+					
+					rs.MoveNext
+				Next
+				rs.Close
+				
+				bCherche.Enabled = True
+				bPaye.Enabled = True
+				rgCherche.Enabled = True
+				txtCherche.Enabled = True
+			else
+				bCherche.Enabled = False
+				bPaye.Enabled = False
+				rgCherche.Enabled = False
+				txtCherche.Enabled = False
+			End If
+		End Sub
+  )
+ Meth/g: 
+ Meth/G: 
+  name/S: recPayment
+  Comp/S: 
+  Vsbl/N: 1
+  Enco/N: 134217984
+  Alas/S: 
+  flag/N: 0
+  shrd/N: 0
+  parm/S: 
+  rslt/S: 
+  sorc/d: (Enco/N: 134217984
+		Sub recPayment()
+			If lbProm.ListIndex > -1 Then
+				
+				Session.sID = pID
+				dialogPayment1.Init
+				dialogPayment1.Show
+			else
+				Session.sID = ""
+				
+			End If
+			
+			
+		End Sub
+  )
+ Meth/g: 
+ Prop/G: 
+  name/S: pID
+  Comp/S: 
+  Vsbl/N: 1
+  Enco/N: 134217984
+  decl/S: pID As String
+  flag/N: 0
+  shrd/N: 0
+  sorc/d: (Enco/N: 134217984
+		pID As String
+  )
+ Prop/g: 
+ PDef/D: (name/S: Style, type/S: String, visi/N: 1, Enco/N: 134217984, PVal/S: None)
+ PDef/D: (name/S: _VerticalPercent, type/S: Double, visi/N: 0, PVal/S: 0.0)
+ PDef/D: (name/S: _ShownEventFired, type/S: Boolean, visi/N: 0, PVal/S: False)
+ PDef/D: (name/S: _OpenEventFired, type/S: Boolean, visi/N: 0, PVal/S: False)
+ PDef/D: (name/S: _OfficialControl, type/S: Boolean, visi/N: 0, PVal/S: False)
+ PDef/D: (name/S: _NeedsRendering, type/S: Boolean, visi/N: 0, PVal/S: True)
+ PDef/D: (name/S: _Locked, type/S: Boolean, visi/N: 0, PVal/S: False)
+ PDef/D: (name/S: _IsEmbedded, type/S: Boolean, visi/N: 0, PVal/S: False)
+ PDef/D: (name/S: _HorizontalPercent, type/S: Double, visi/N: 0, PVal/S: 0.0)
+ PDef/D: (name/S: ZIndex, type/S: Integer, visi/N: 0, PVal/N: 1)
+ PDef/D: (name/S: Visible, type/S: Boolean, visi/N: 1, PVal/S: True)
+ PDef/D: (name/S: VerticalCenter, type/S: Integer, visi/N: 0, PVal/N: 0)
+ PDef/D: (name/S: Top, type/S: Integer, visi/N: 1, PVal/N: 0)
+ PDef/D: (name/S: TabOrder, type/S: Integer, visi/N: 1, PVal/N: 0)
+ PDef/D: (name/S: LockVertical, type/S: Boolean, visi/N: 0, PVal/S: False)
+ PDef/D: (name/S: LockTop, type/S: Boolean, visi/N: 1, PVal/S: True)
+ PDef/D: (name/S: LockRight, type/S: Boolean, visi/N: 1, PVal/S: True)
+ PDef/D: (name/S: LockLeft, type/S: Boolean, visi/N: 1, PVal/S: True)
+ PDef/D: (name/S: LockHorizontal, type/S: Boolean, visi/N: 0, PVal/S: False)
+ PDef/D: (name/S: LockBottom, type/S: Boolean, visi/N: 1, PVal/S: True)
+ PDef/D: (name/S: Left, type/S: Integer, visi/N: 1, PVal/N: 0)
+ PDef/D: (name/S: Index, type/S: Integer, visi/N: 1, PVal/N: -2147483648)
+ PDef/D: (name/S: HorizontalCenter, type/S: Integer, visi/N: 0, PVal/N: 0)
+ PDef/D: (name/S: HelpTag, type/S: String, visi/N: 0, Enco/N: 1536, PVal/S: )
+ PDef/D: (name/S: Enabled, type/S: Boolean, visi/N: 1, PVal/S: True)
+ PDef/D: (name/S: Cursor, type/S: Integer, visi/N: 1, PVal/N: 0)
+ PDef/D: (name/S: Height, type/S: Integer, visi/N: 1, PVal/N: 718)
+ PDef/D: (name/S: Width, type/S: Integer, visi/N: 1, PVal/N: 1180)
+ VwBh/G: 
+  VwPr/G: 
+   Name/S: Cursor
+   Vsbl/N: 1
+   PrGp/S: Behavior
+   PVal/S: 0
+   type/S: Integer
+   vbET/S: Enum
+   Enum/D: (defn/S: 0 - Auto, defn/S: 1 - Standard Pointer, defn/S: 2 - Finger Pointer, defn/S: 3 - IBeam, defn/S: 4 - Wait, defn/S: 5 - Help, defn/S: 6 - Arrow All Directions, defn/S: 7 - Arrow North, defn/S: 8 - Arrow South, defn/S: 9 - Arrow East, defn/S: 10 - Arrow West, defn/S: 11 - Arrow North East, defn/S: 12 - Arrow North West, defn/S: 13 - Arrow South East, defn/S: 14 - Arrow South West, defn/S: 15 - Splitter East West, defn/S: 16 - Splitter North South, defn/S: 17 - Progress, defn/S: 18 - No Drop, defn/S: 19 - Not Allowed, defn/S: 20 - Vertical IBeam, defn/S: 21 - Crosshair)
+  VwPr/g: 
+  VwPr/D: (Name/S: Enabled, Vsbl/N: 1, PrGp/S: Behavior, PVal/S: True, type/S: Boolean)
+  VwPr/D: (Name/S: Height, Vsbl/N: 1, PrGp/S: Behavior, PVal/S: 300, type/S: Integer)
+  VwPr/D: (Name/S: HelpTag, Vsbl/N: 1, PrGp/S: Behavior, type/S: String, vbET/S: MultiLineEditor)
+  VwPr/D: (Name/S: HorizontalCenter, PrGp/S: Behavior, type/S: Integer)
+  VwPr/D: (Name/S: Index, Vsbl/N: 1, PrGp/S: ID, PVal/S: -2147483648, type/S: Integer)
+  VwPr/D: (Name/S: Left, Vsbl/N: 1, PrGp/S: Position, PVal/S: 0, type/S: Integer)
+  VwPr/D: (Name/S: LockBottom, Vsbl/N: 1, PrGp/S: Behavior, PVal/S: False, type/S: Boolean)
+  VwPr/D: (Name/S: LockHorizontal, Vsbl/N: 1, PrGp/S: Behavior, PVal/S: False, type/S: Boolean)
+  VwPr/D: (Name/S: LockLeft, Vsbl/N: 1, PrGp/S: Behavior, PVal/S: True, type/S: Boolean)
+  VwPr/D: (Name/S: LockRight, Vsbl/N: 1, PrGp/S: Behavior, PVal/S: False, type/S: Boolean)
+  VwPr/D: (Name/S: LockTop, Vsbl/N: 1, PrGp/S: Behavior, PVal/S: True, type/S: Boolean)
+  VwPr/D: (Name/S: LockVertical, Vsbl/N: 1, PrGp/S: Behavior, PVal/S: False, type/S: Boolean)
+  VwPr/D: (Name/S: Name, Vsbl/N: 1, PrGp/S: ID, type/S: String)
+  VwPr/D: (Name/S: pID, PrGp/S: Behavior, type/S: String, vbET/S: MultiLineEditor)
+  VwPr/G: 
+   Name/S: ScrollbarsVisible
+   Vsbl/N: 1
+   PrGp/S: Behavior
+   PVal/S: 0
+   type/S: Integer
+   vbET/S: Enum
+   Enum/D: (defn/S: 0 - Automatic, defn/S: 1 - Always, defn/S: 2 - Never)
+  VwPr/g: 
+  VwPr/D: (Name/S: Super, Vsbl/N: 1, PrGp/S: ID, type/S: String)
+  VwPr/D: (Name/S: TabOrder, Vsbl/N: 1, PrGp/S: Behavior, PVal/S: 0, type/S: Integer)
+  VwPr/D: (Name/S: Top, Vsbl/N: 1, PrGp/S: Position, PVal/S: 0, type/S: Integer)
+  VwPr/D: (Name/S: VerticalCenter, PrGp/S: Behavior, type/S: Integer)
+  VwPr/D: (Name/S: Visible, Vsbl/N: 1, PrGp/S: Behavior, PVal/S: True, type/S: Boolean)
+  VwPr/D: (Name/S: Width, Vsbl/N: 1, PrGp/S: Behavior, PVal/S: 300, type/S: Integer)
+  VwPr/D: (Name/S: ZIndex, PrGp/S: Behavior, PVal/S: 1, type/S: Integer)
+  VwPr/D: (Name/S: _HorizontalPercent, PrGp/S: Behavior, type/S: Double)
+  VwPr/D: (Name/S: _IsEmbedded, PrGp/S: Behavior, type/S: Boolean)
+  VwPr/D: (Name/S: _Locked, PrGp/S: Behavior, type/S: Boolean)
+  VwPr/D: (Name/S: _NeedsRendering, PrGp/S: Behavior, PVal/S: True, type/S: Boolean)
+  VwPr/D: (Name/S: _OfficialControl, PrGp/S: Behavior, PVal/S: False, type/S: Boolean)
+  VwPr/D: (Name/S: _OpenEventFired, PrGp/S: Behavior, type/S: Boolean)
+  VwPr/D: (Name/S: _ShownEventFired, PrGp/S: Behavior, type/S: Boolean)
+  VwPr/D: (Name/S: _VerticalPercent, PrGp/S: Behavior, type/S: Double)
+ VwBh/g: 
+ CBhv/G: 
+  Supr/S: WebListBox
+  HIns/G: 
+   name/S: DoubleClick
+   Comp/S: 
+   Vsbl/N: 1
+   sorc/d: (Enco/N: 134217984
+		Sub DoubleClick(X As Integer, Y As Integer, Details As REALbasic.MouseEvent)
+			recPayment
+		End Sub
+   )
+  HIns/g: 
+  HIns/G: 
+   name/S: SelectionChanged
+   Comp/S: 
+   Vsbl/N: 1
+   sorc/d: (Enco/N: 134217984
+		Sub SelectionChanged()
+			if lbProm.ListIndex > -1 Then
+				pID = lbProm.Cell(lbProm.ListIndex, 0)
+			else
+				pID = ""
+			end if
+			
+			
+		End Sub
+   )
+  HIns/g: 
+ CBhv/g: 
+ CBhv/D: (Supr/S: WebLabel)
+ CBhv/G: 
+  Supr/S: WebRadioGroup
+  HIns/G: 
+   name/S: KeyPressed
+   Comp/S: 
+   Vsbl/N: 1
+   sorc/d: (Enco/N: 134217984
+		Sub KeyPressed(Details As REALbasic.KeyEvent)
+			'Dim p As Pair
+			'p = Me.SelectedCell
+			'
+			'Select Case p.Left
+			'Case 0
+			'txtCherche.Type = WebTextField.TypeNumber
+			'Case 1
+			'txtCherche.Type = WebTextField.TypeNormal
+			'End Select
+			'
+			'
+			
+		End Sub
+   )
+  HIns/g: 
+ CBhv/g: 
+ CBhv/D: (Supr/S: WebTextField)
+ CBhv/G: 
+  Supr/S: WebButton
+  HIns/G: 
+   name/S: Action
+   Comp/S: 
+   Vsbl/N: 1
+   sorc/d: (Enco/N: 134217984
+		Sub Action()
+			Dim rs As RecordSet
+			
+			If len(trim(txtCherche.Text)) > 0 then
+				Dim p As Pair
+				p = rgCherche.SelectedCell
+				
+				Select Case p.Left
+				Case 0
+					rs = Session.db.getPromesseID(txtCherche.Text)
+				Case 1
+					rs = Session.db.getPromesseName(txtCherche.Text)
+				end Select
+			else
+				rs = Session.db.getPromesses
+				
+			end if
+			
+			listProm(rs)
+			
+		End Sub
+   )
+  HIns/g: 
+ CBhv/g: 
+ CBhv/G: 
+  Supr/S: WebButton
+  HIns/G: 
+   name/S: Action
+   Comp/S: 
+   Vsbl/N: 1
+   sorc/d: (Enco/N: 134217984
+		Sub Action()
+			recPayment
+		End Sub
+   )
+  HIns/g: 
+ CBhv/g: 
+ CBhv/D: (Supr/S: dialogPayment)
+ Ctrl/G: 
+  ccls/S: WebListBox
+  ocls/S: RBWebListBox
+  PDef/D: (name/S: InitialValue, type/S: String, visi/N: 0, Enco/N: 1536, PVal/S: )
+  PDef/D: (name/S: Style, type/S: String, visi/N: 0, Enco/N: 134217984, PVal/S: None)
+  PDef/D: (name/S: _VerticalPercent, type/S: Double, visi/N: 0, PVal/S: 0.0)
+  PDef/D: (name/S: _OpenEventFired, type/S: Boolean, visi/N: 0, PVal/S: False)
+  PDef/D: (name/S: _OfficialControl, type/S: Boolean, visi/N: 0, PVal/S: False)
+  PDef/D: (name/S: _NeedsRendering, type/S: Boolean, visi/N: 0, PVal/S: True)
+  PDef/D: (name/S: _Locked, type/S: Boolean, visi/N: 0, PVal/S: False)
+  PDef/D: (name/S: _IsEmbedded, type/S: Boolean, visi/N: 0, PVal/S: False)
+  PDef/D: (name/S: _HorizontalPercent, type/S: Double, visi/N: 0, PVal/S: 0.0)
+  PDef/D: (name/S: ZIndex, type/S: Integer, visi/N: 0, PVal/N: 1)
+  PDef/D: (name/S: VerticalCenter, type/S: Integer, visi/N: 0, PVal/N: 0)
+  PDef/D: (name/S: PrimaryRowColor, type/S: Color, visi/N: 1, PVal/N: 16777215)
+  PDef/D: (name/S: Multiline, type/S: Boolean, visi/N: 1, PVal/S: False)
+  PDef/D: (name/S: MinimumRowHeight, type/S: Integer, visi/N: 1, PVal/N: 22)
+  PDef/D: (name/S: ListIndex, type/S: Integer, visi/N: 1, PVal/N: -1)
+  PDef/D: (name/S: HorizontalCenter, type/S: Integer, visi/N: 0, PVal/N: 0)
+  PDef/D: (name/S: HasHeading, type/S: Boolean, visi/N: 1, PVal/S: True)
+  PDef/D: (name/S: ColumnWidths, type/S: String, visi/N: 1, Enco/N: 134217984, PVal/S: 50,200,80,200,80,100,80)
+  PDef/D: (name/S: ColumnCount, type/S: Integer, visi/N: 1, PVal/N: 7)
+  PDef/D: (name/S: AlternateRowColor, type/S: Color, visi/N: 1, PVal/N: 15594494)
+  PDef/D: (name/S: HelpTag, type/S: String, visi/N: 1, Enco/N: 1536, PVal/S: )
+  PDef/D: (name/S: TabOrder, type/S: Integer, visi/N: 1, PVal/N: 0)
+  PDef/D: (name/S: Cursor, type/S: Integer, visi/N: 1, PVal/N: 0)
+  PDef/D: (name/S: Enabled, type/S: Boolean, visi/N: 1, PVal/S: True)
+  PDef/D: (name/S: Visible, type/S: Boolean, visi/N: 1, PVal/S: True)
+  PDef/D: (name/S: LockVertical, type/S: Boolean, visi/N: 1, PVal/S: False)
+  PDef/D: (name/S: LockHorizontal, type/S: Boolean, visi/N: 1, PVal/S: False)
+  PDef/D: (name/S: LockBottom, type/S: Boolean, visi/N: 1, PVal/S: True)
+  PDef/D: (name/S: LockRight, type/S: Boolean, visi/N: 1, PVal/S: True)
+  PDef/D: (name/S: LockTop, type/S: Boolean, visi/N: 1, PVal/S: True)
+  PDef/D: (name/S: LockLeft, type/S: Boolean, visi/N: 1, PVal/S: True)
+  PDef/D: (name/S: Height, type/S: Integer, visi/N: 1, PVal/N: 544)
+  PDef/D: (name/S: Width, type/S: Integer, visi/N: 1, PVal/N: 964)
+  PDef/D: (name/S: Top, type/S: Integer, visi/N: 1, PVal/N: 105)
+  PDef/D: (name/S: Left, type/S: Integer, visi/N: 1, PVal/N: 108)
+  PDef/D: (name/S: Scope, type/S: Enum, visi/N: 1, PVal/S: 0)
+  PDef/D: (name/S: Super, type/S: String, visi/N: 1, Enco/N: 134217984, PVal/S: WebListBox)
+  PDef/D: (name/S: Index, type/S: Integer, visi/N: 1, PVal/N: -2147483648)
+  PDef/D: (name/S: Name, type/S: String, visi/N: 1, Enco/N: 134217984, PVal/S: lbProm)
+  CBix/N: 0
+  iLck/N: 0
+  wInV/S: No	Nom	Montant	Mail	Anonyme	Date	Paye
+ Ctrl/g: 
+ Ctrl/G: 
+  ccls/S: WebLabel
+  ocls/S: RBWebTextControl
+  PDef/D: (name/S: Style, type/S: String, visi/N: 0, Enco/N: 134217984, PVal/S: None)
+  PDef/D: (name/S: _VerticalPercent, type/S: Double, visi/N: 0, PVal/S: 0.0)
+  PDef/D: (name/S: _OpenEventFired, type/S: Boolean, visi/N: 0, PVal/S: False)
+  PDef/D: (name/S: _OfficialControl, type/S: Boolean, visi/N: 0, PVal/S: False)
+  PDef/D: (name/S: _NeedsRendering, type/S: Boolean, visi/N: 0, PVal/S: True)
+  PDef/D: (name/S: _Locked, type/S: Boolean, visi/N: 0, PVal/S: False)
+  PDef/D: (name/S: _IsEmbedded, type/S: Boolean, visi/N: 0, PVal/S: False)
+  PDef/D: (name/S: _HorizontalPercent, type/S: Double, visi/N: 0, PVal/S: 0.0)
+  PDef/D: (name/S: ZIndex, type/S: Integer, visi/N: 0, PVal/N: 1)
+  PDef/D: (name/S: VerticalCenter, type/S: Integer, visi/N: 0, PVal/N: 0)
+  PDef/D: (name/S: Text, type/S: String, visi/N: 1, Enco/N: 134217984, PVal/S: Recherche par:)
+  PDef/D: (name/S: Multiline, type/S: Boolean, visi/N: 1, PVal/S: False)
+  PDef/D: (name/S: HorizontalCenter, type/S: Integer, visi/N: 0, PVal/N: 0)
+  PDef/D: (name/S: HasFocusRing, type/S: Boolean, visi/N: 1, PVal/S: True)
+  PDef/D: (name/S: HelpTag, type/S: String, visi/N: 1, Enco/N: 1536, PVal/S: )
+  PDef/D: (name/S: TabOrder, type/S: Integer, visi/N: 1, PVal/N: 0)
+  PDef/D: (name/S: Cursor, type/S: Integer, visi/N: 1, PVal/N: 1)
+  PDef/D: (name/S: Enabled, type/S: Boolean, visi/N: 1, PVal/S: True)
+  PDef/D: (name/S: Visible, type/S: Boolean, visi/N: 1, PVal/S: True)
+  PDef/D: (name/S: LockVertical, type/S: Boolean, visi/N: 1, PVal/S: False)
+  PDef/D: (name/S: LockHorizontal, type/S: Boolean, visi/N: 1, PVal/S: False)
+  PDef/D: (name/S: LockBottom, type/S: Boolean, visi/N: 1, PVal/S: False)
+  PDef/D: (name/S: LockRight, type/S: Boolean, visi/N: 1, PVal/S: False)
+  PDef/D: (name/S: LockTop, type/S: Boolean, visi/N: 1, PVal/S: True)
+  PDef/D: (name/S: LockLeft, type/S: Boolean, visi/N: 1, PVal/S: True)
+  PDef/D: (name/S: Height, type/S: Integer, visi/N: 1, PVal/N: 22)
+  PDef/D: (name/S: Width, type/S: Integer, visi/N: 1, PVal/N: 111)
+  PDef/D: (name/S: Top, type/S: Integer, visi/N: 1, PVal/N: 57)
+  PDef/D: (name/S: Left, type/S: Integer, visi/N: 1, PVal/N: 108)
+  PDef/D: (name/S: Scope, type/S: Enum, visi/N: 1, PVal/S: 0)
+  PDef/D: (name/S: Super, type/S: String, visi/N: 1, Enco/N: 134217984, PVal/S: WebLabel)
+  PDef/D: (name/S: Index, type/S: Integer, visi/N: 1, PVal/N: -2147483648)
+  PDef/D: (name/S: Name, type/S: String, visi/N: 1, Enco/N: 134217984, PVal/S: lCherche)
+  CBix/N: 1
+  iLck/N: 0
+ Ctrl/g: 
+ Ctrl/G: 
+  ccls/S: WebRadioGroup
+  ocls/S: RBWebRadioGroup
+  PDef/D: (name/S: InitialValue, type/S: String, visi/N: 0, Enco/N: 1536, PVal/S: )
+  PDef/D: (name/S: Style, type/S: String, visi/N: 0, Enco/N: 134217984, PVal/S: None)
+  PDef/D: (name/S: _VerticalPercent, type/S: Double, visi/N: 0, PVal/S: 0.0)
+  PDef/D: (name/S: _OpenEventFired, type/S: Boolean, visi/N: 0, PVal/S: False)
+  PDef/D: (name/S: _OfficialControl, type/S: Boolean, visi/N: 0, PVal/S: False)
+  PDef/D: (name/S: _NeedsRendering, type/S: Boolean, visi/N: 0, PVal/S: True)
+  PDef/D: (name/S: _Locked, type/S: Boolean, visi/N: 0, PVal/S: False)
+  PDef/D: (name/S: _IsEmbedded, type/S: Boolean, visi/N: 0, PVal/S: False)
+  PDef/D: (name/S: _HorizontalPercent, type/S: Double, visi/N: 0, PVal/S: 0.0)
+  PDef/D: (name/S: ZIndex, type/S: Integer, visi/N: 0, PVal/N: 1)
+  PDef/D: (name/S: VerticalCenter, type/S: Integer, visi/N: 0, PVal/N: 0)
+  PDef/D: (name/S: RowCount, type/S: Integer, visi/N: 1, PVal/N: 2)
+  PDef/D: (name/S: HorizontalCenter, type/S: Integer, visi/N: 0, PVal/N: 0)
+  PDef/D: (name/S: ColumnCount, type/S: Integer, visi/N: 1, PVal/N: 1)
+  PDef/D: (name/S: HelpTag, type/S: String, visi/N: 1, Enco/N: 1536, PVal/S: )
+  PDef/D: (name/S: TabOrder, type/S: Integer, visi/N: 1, PVal/N: 1)
+  PDef/D: (name/S: Cursor, type/S: Integer, visi/N: 1, PVal/N: 1)
+  PDef/D: (name/S: Enabled, type/S: Boolean, visi/N: 1, PVal/S: True)
+  PDef/D: (name/S: Visible, type/S: Boolean, visi/N: 1, PVal/S: True)
+  PDef/D: (name/S: LockVertical, type/S: Boolean, visi/N: 1, PVal/S: False)
+  PDef/D: (name/S: LockHorizontal, type/S: Boolean, visi/N: 1, PVal/S: False)
+  PDef/D: (name/S: LockBottom, type/S: Boolean, visi/N: 1, PVal/S: False)
+  PDef/D: (name/S: LockRight, type/S: Boolean, visi/N: 1, PVal/S: False)
+  PDef/D: (name/S: LockTop, type/S: Boolean, visi/N: 1, PVal/S: True)
+  PDef/D: (name/S: LockLeft, type/S: Boolean, visi/N: 1, PVal/S: True)
+  PDef/D: (name/S: Height, type/S: Integer, visi/N: 1, PVal/N: 44)
+  PDef/D: (name/S: Width, type/S: Integer, visi/N: 1, PVal/N: 114)
+  PDef/D: (name/S: Top, type/S: Integer, visi/N: 1, PVal/N: 47)
+  PDef/D: (name/S: Left, type/S: Integer, visi/N: 1, PVal/N: 220)
+  PDef/D: (name/S: Scope, type/S: Enum, visi/N: 1, PVal/S: 0)
+  PDef/D: (name/S: Super, type/S: String, visi/N: 1, Enco/N: 134217984, PVal/S: WebRadioGroup)
+  PDef/D: (name/S: Index, type/S: Integer, visi/N: 1, PVal/N: -2147483648)
+  PDef/D: (name/S: Name, type/S: String, visi/N: 1, Enco/N: 134217984, PVal/S: rgCherche)
+  CBix/N: 2
+  iLck/N: 0
+  wInV/h: 604E6F2050726F6D65737365602C6054727565602C60602C6054727565602C6054727565600A604E6F6D602C6054727565602C60602C6046616C7365602C605472756560
+ Ctrl/g: 
+ Ctrl/G: 
+  ccls/S: WebTextField
+  ocls/S: RBWebTextControl
+  PDef/D: (name/S: Style, type/S: String, visi/N: 0, Enco/N: 134217984, PVal/S: None)
+  PDef/D: (name/S: _VerticalPercent, type/S: Double, visi/N: 0, PVal/S: 0.0)
+  PDef/D: (name/S: _OpenEventFired, type/S: Boolean, visi/N: 0, PVal/S: False)
+  PDef/D: (name/S: _OfficialControl, type/S: Boolean, visi/N: 0, PVal/S: False)
+  PDef/D: (name/S: _NeedsRendering, type/S: Boolean, visi/N: 0, PVal/S: True)
+  PDef/D: (name/S: _Locked, type/S: Boolean, visi/N: 0, PVal/S: False)
+  PDef/D: (name/S: _IsEmbedded, type/S: Boolean, visi/N: 0, PVal/S: False)
+  PDef/D: (name/S: _HorizontalPercent, type/S: Double, visi/N: 0, PVal/S: 0.0)
+  PDef/D: (name/S: ZIndex, type/S: Integer, visi/N: 0, PVal/N: 1)
+  PDef/D: (name/S: VerticalCenter, type/S: Integer, visi/N: 0, PVal/N: 0)
+  PDef/D: (name/S: Type, type/S: Integer, visi/N: 1, PVal/N: 0)
+  PDef/D: (name/S: Text, type/S: String, visi/N: 1, Enco/N: 1536, PVal/S: )
+  PDef/D: (name/S: ReadOnly, type/S: Boolean, visi/N: 1, PVal/S: False)
+  PDef/D: (name/S: Password, type/S: Boolean, visi/N: 0, PVal/S: False)
+  PDef/D: (name/S: LimitText, type/S: Integer, visi/N: 1, PVal/N: 0)
+  PDef/D: (name/S: HorizontalCenter, type/S: Integer, visi/N: 0, PVal/N: 0)
+  PDef/D: (name/S: HasFocusRing, type/S: Boolean, visi/N: 1, PVal/S: True)
+  PDef/D: (name/S: AutoCorrect, type/S: Boolean, visi/N: 1, PVal/S: True)
+  PDef/D: (name/S: AutoComplete, type/S: Boolean, visi/N: 1, PVal/S: True)
+  PDef/D: (name/S: AutoCapitalize, type/S: Boolean, visi/N: 1, PVal/S: True)
+  PDef/D: (name/S: HelpTag, type/S: String, visi/N: 1, Enco/N: 1536, PVal/S: )
+  PDef/D: (name/S: TabOrder, type/S: Integer, visi/N: 1, PVal/N: 2)
+  PDef/D: (name/S: Cursor, type/S: Integer, visi/N: 1, PVal/N: 0)
+  PDef/D: (name/S: Enabled, type/S: Boolean, visi/N: 1, PVal/S: True)
+  PDef/D: (name/S: Visible, type/S: Boolean, visi/N: 1, PVal/S: True)
+  PDef/D: (name/S: LockVertical, type/S: Boolean, visi/N: 1, PVal/S: False)
+  PDef/D: (name/S: LockHorizontal, type/S: Boolean, visi/N: 1, PVal/S: False)
+  PDef/D: (name/S: LockBottom, type/S: Boolean, visi/N: 1, PVal/S: False)
+  PDef/D: (name/S: LockRight, type/S: Boolean, visi/N: 1, PVal/S: False)
+  PDef/D: (name/S: LockTop, type/S: Boolean, visi/N: 1, PVal/S: True)
+  PDef/D: (name/S: LockLeft, type/S: Boolean, visi/N: 1, PVal/S: True)
+  PDef/D: (name/S: Height, type/S: Integer, visi/N: 1, PVal/N: 22)
+  PDef/D: (name/S: Width, type/S: Integer, visi/N: 1, PVal/N: 239)
+  PDef/D: (name/S: Top, type/S: Integer, visi/N: 1, PVal/N: 57)
+  PDef/D: (name/S: Left, type/S: Integer, visi/N: 1, PVal/N: 360)
+  PDef/D: (name/S: Scope, type/S: Enum, visi/N: 1, PVal/S: 0)
+  PDef/D: (name/S: Super, type/S: String, visi/N: 1, Enco/N: 134217984, PVal/S: WebTextField)
+  PDef/D: (name/S: Index, type/S: Integer, visi/N: 1, PVal/N: -2147483648)
+  PDef/D: (name/S: Name, type/S: String, visi/N: 1, Enco/N: 134217984, PVal/S: txtCherche)
+  CBix/N: 3
+  iLck/N: 0
+ Ctrl/g: 
+ Ctrl/G: 
+  ccls/S: WebButton
+  ocls/S: RBWebButton
+  PDef/D: (name/S: Style, type/S: String, visi/N: 0, Enco/N: 134217984, PVal/S: None)
+  PDef/D: (name/S: _VerticalPercent, type/S: Double, visi/N: 0, PVal/S: 0.0)
+  PDef/D: (name/S: _OpenEventFired, type/S: Boolean, visi/N: 0, PVal/S: False)
+  PDef/D: (name/S: _OfficialControl, type/S: Boolean, visi/N: 0, PVal/S: False)
+  PDef/D: (name/S: _NeedsRendering, type/S: Boolean, visi/N: 0, PVal/S: True)
+  PDef/D: (name/S: _Locked, type/S: Boolean, visi/N: 0, PVal/S: False)
+  PDef/D: (name/S: _IsEmbedded, type/S: Boolean, visi/N: 0, PVal/S: False)
+  PDef/D: (name/S: _HorizontalPercent, type/S: Double, visi/N: 0, PVal/S: 0.0)
+  PDef/D: (name/S: ZIndex, type/S: Integer, visi/N: 0, PVal/N: 1)
+  PDef/D: (name/S: VerticalCenter, type/S: Integer, visi/N: 0, PVal/N: 0)
+  PDef/D: (name/S: HorizontalCenter, type/S: Integer, visi/N: 0, PVal/N: 0)
+  PDef/D: (name/S: Caption, type/S: String, visi/N: 1, Enco/N: 134217984, PVal/S: Recherche)
+  PDef/D: (name/S: HelpTag, type/S: String, visi/N: 1, Enco/N: 1536, PVal/S: )
+  PDef/D: (name/S: TabOrder, type/S: Integer, visi/N: 1, PVal/N: 3)
+  PDef/D: (name/S: Cursor, type/S: Integer, visi/N: 1, PVal/N: 0)
+  PDef/D: (name/S: Enabled, type/S: Boolean, visi/N: 1, PVal/S: True)
+  PDef/D: (name/S: Visible, type/S: Boolean, visi/N: 1, PVal/S: True)
+  PDef/D: (name/S: LockVertical, type/S: Boolean, visi/N: 1, PVal/S: False)
+  PDef/D: (name/S: LockHorizontal, type/S: Boolean, visi/N: 1, PVal/S: False)
+  PDef/D: (name/S: LockBottom, type/S: Boolean, visi/N: 1, PVal/S: False)
+  PDef/D: (name/S: LockRight, type/S: Boolean, visi/N: 1, PVal/S: False)
+  PDef/D: (name/S: LockTop, type/S: Boolean, visi/N: 1, PVal/S: True)
+  PDef/D: (name/S: LockLeft, type/S: Boolean, visi/N: 1, PVal/S: True)
+  PDef/D: (name/S: Height, type/S: Integer, visi/N: 1, PVal/N: 22)
+  PDef/D: (name/S: Width, type/S: Integer, visi/N: 1, PVal/N: 100)
+  PDef/D: (name/S: Top, type/S: Integer, visi/N: 1, PVal/N: 57)
+  PDef/D: (name/S: Left, type/S: Integer, visi/N: 1, PVal/N: 623)
+  PDef/D: (name/S: Scope, type/S: Enum, visi/N: 1, PVal/S: 0)
+  PDef/D: (name/S: Super, type/S: String, visi/N: 1, Enco/N: 134217984, PVal/S: WebButton)
+  PDef/D: (name/S: Index, type/S: Integer, visi/N: 1, PVal/N: -2147483648)
+  PDef/D: (name/S: Name, type/S: String, visi/N: 1, Enco/N: 134217984, PVal/S: bCherche)
+  CBix/N: 4
+  iLck/N: 0
+ Ctrl/g: 
+ Ctrl/G: 
+  ccls/S: WebButton
+  ocls/S: RBWebButton
+  PDef/D: (name/S: Style, type/S: String, visi/N: 0, Enco/N: 134217984, PVal/S: None)
+  PDef/D: (name/S: _VerticalPercent, type/S: Double, visi/N: 0, PVal/S: 0.0)
+  PDef/D: (name/S: _OpenEventFired, type/S: Boolean, visi/N: 0, PVal/S: False)
+  PDef/D: (name/S: _OfficialControl, type/S: Boolean, visi/N: 0, PVal/S: False)
+  PDef/D: (name/S: _NeedsRendering, type/S: Boolean, visi/N: 0, PVal/S: True)
+  PDef/D: (name/S: _Locked, type/S: Boolean, visi/N: 0, PVal/S: False)
+  PDef/D: (name/S: _IsEmbedded, type/S: Boolean, visi/N: 0, PVal/S: False)
+  PDef/D: (name/S: _HorizontalPercent, type/S: Double, visi/N: 0, PVal/S: 0.0)
+  PDef/D: (name/S: ZIndex, type/S: Integer, visi/N: 0, PVal/N: 1)
+  PDef/D: (name/S: VerticalCenter, type/S: Integer, visi/N: 0, PVal/N: 0)
+  PDef/D: (name/S: HorizontalCenter, type/S: Integer, visi/N: 0, PVal/N: 0)
+  PDef/D: (name/S: Caption, type/S: String, visi/N: 1, Enco/N: 134217984, PVal/S: Enregistrer Payement pour Promesse (double-click))
+  PDef/D: (name/S: HelpTag, type/S: String, visi/N: 1, Enco/N: 1536, PVal/S: )
+  PDef/D: (name/S: TabOrder, type/S: Integer, visi/N: 1, PVal/N: 4)
+  PDef/D: (name/S: Cursor, type/S: Integer, visi/N: 1, PVal/N: 0)
+  PDef/D: (name/S: Enabled, type/S: Boolean, visi/N: 1, PVal/S: True)
+  PDef/D: (name/S: Visible, type/S: Boolean, visi/N: 1, PVal/S: True)
+  PDef/D: (name/S: LockVertical, type/S: Boolean, visi/N: 1, PVal/S: False)
+  PDef/D: (name/S: LockHorizontal, type/S: Boolean, visi/N: 1, PVal/S: True)
+  PDef/D: (name/S: LockBottom, type/S: Boolean, visi/N: 1, PVal/S: True)
+  PDef/D: (name/S: LockRight, type/S: Boolean, visi/N: 1, PVal/S: False)
+  PDef/D: (name/S: LockTop, type/S: Boolean, visi/N: 1, PVal/S: False)
+  PDef/D: (name/S: LockLeft, type/S: Boolean, visi/N: 1, PVal/S: False)
+  PDef/D: (name/S: Height, type/S: Integer, visi/N: 1, PVal/N: 22)
+  PDef/D: (name/S: Width, type/S: Integer, visi/N: 1, PVal/N: 418)
+  PDef/D: (name/S: Top, type/S: Integer, visi/N: 1, PVal/N: 676)
+  PDef/D: (name/S: Left, type/S: Integer, visi/N: 1, PVal/N: 381)
+  PDef/D: (name/S: Scope, type/S: Enum, visi/N: 1, PVal/S: 0)
+  PDef/D: (name/S: Super, type/S: String, visi/N: 1, Enco/N: 134217984, PVal/S: WebButton)
+  PDef/D: (name/S: Index, type/S: Integer, visi/N: 1, PVal/N: -2147483648)
+  PDef/D: (name/S: Name, type/S: String, visi/N: 1, Enco/N: 134217984, PVal/S: bPaye)
+  CBix/N: 5
+  iLck/N: 0
+ Ctrl/g: 
+ Ctrl/G: 
+  ccls/S: dialogPayment
+  ocls/S: RBWebControl
+  PDef/D: (name/S: Style, type/S: String, visi/N: 0, Enco/N: 134217984, PVal/S: None)
+  PDef/D: (name/S: TabPanelIndex, type/S: Integer, visi/N: 0, PVal/N: 0)
+  PDef/D: (name/S: _VerticalPercent, type/S: Double, visi/N: 0, PVal/S: 0.0)
+  PDef/D: (name/S: _ShownEventFired, type/S: Boolean, visi/N: 0, PVal/S: False)
+  PDef/D: (name/S: _OpenEventFired, type/S: Boolean, visi/N: 0, PVal/S: False)
+  PDef/D: (name/S: _OfficialControl, type/S: Boolean, visi/N: 0, PVal/S: False)
+  PDef/D: (name/S: _NeedsRendering, type/S: Boolean, visi/N: 0, PVal/S: True)
+  PDef/D: (name/S: _Locked, type/S: Boolean, visi/N: 0, PVal/S: False)
+  PDef/D: (name/S: _IsEmbedded, type/S: Boolean, visi/N: 0, PVal/S: False)
+  PDef/D: (name/S: _HorizontalPercent, type/S: Double, visi/N: 0, PVal/S: 0.0)
+  PDef/D: (name/S: ZIndex, type/S: Integer, visi/N: 0, PVal/N: 1)
+  PDef/D: (name/S: VerticalCenter, type/S: Integer, visi/N: 0, PVal/N: 0)
+  PDef/D: (name/S: Type, type/S: Integer, visi/N: 1, PVal/N: 3)
+  PDef/D: (name/S: Title, type/S: String, visi/N: 1, Enco/N: 134217984, PVal/S: Sans_titre)
+  PDef/D: (name/S: Resizable, type/S: Boolean, visi/N: 1, PVal/S: True)
+  PDef/D: (name/S: MinWidth, type/S: Integer, visi/N: 1, PVal/N: 0)
+  PDef/D: (name/S: MinHeight, type/S: Integer, visi/N: 1, PVal/N: 0)
+  PDef/D: (name/S: HorizontalCenter, type/S: Integer, visi/N: 0, PVal/N: 0)
+  PDef/D: (name/S: HelpTag, type/S: String, visi/N: 1, Enco/N: 1536, PVal/S: )
+  PDef/D: (name/S: TabOrder, type/S: Integer, visi/N: 1, PVal/N: 0)
+  PDef/D: (name/S: Cursor, type/S: Integer, visi/N: 1, PVal/N: 0)
+  PDef/D: (name/S: Enabled, type/S: Boolean, visi/N: 1, PVal/S: True)
+  PDef/D: (name/S: Visible, type/S: Boolean, visi/N: 0, PVal/S: True)
+  PDef/D: (name/S: LockVertical, type/S: Boolean, visi/N: 0, PVal/S: False)
+  PDef/D: (name/S: LockHorizontal, type/S: Boolean, visi/N: 0, PVal/S: False)
+  PDef/D: (name/S: LockBottom, type/S: Boolean, visi/N: 0, PVal/S: False)
+  PDef/D: (name/S: LockRight, type/S: Boolean, visi/N: 0, PVal/S: False)
+  PDef/D: (name/S: LockTop, type/S: Boolean, visi/N: 0, PVal/S: True)
+  PDef/D: (name/S: LockLeft, type/S: Boolean, visi/N: 0, PVal/S: True)
+  PDef/D: (name/S: Height, type/S: Integer, visi/N: 1, PVal/N: 357)
+  PDef/D: (name/S: Width, type/S: Integer, visi/N: 1, PVal/N: 630)
+  PDef/D: (name/S: Top, type/S: Integer, visi/N: 0, PVal/N: 140)
+  PDef/D: (name/S: Left, type/S: Integer, visi/N: 0, PVal/N: 140)
+  PDef/D: (name/S: Scope, type/S: Enum, visi/N: 1, PVal/S: 0)
+  PDef/D: (name/S: Super, type/S: String, visi/N: 1, Enco/N: 134217984, PVal/S: dialogPayment)
+  PDef/D: (name/S: Index, type/S: Integer, visi/N: 1, PVal/N: -2147483648)
+  PDef/D: (name/S: Name, type/S: String, visi/N: 1, Enco/N: 134217984, PVal/S: dialogPayment1)
+  CBix/N: 6
+  iLck/N: 0
+ Ctrl/g: 
+pWPg/b: 
+##RBvx-End#

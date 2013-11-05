@@ -1,0 +1,350 @@
+﻿##RBvx-PrjVaultItem#2# - <http://www.tempel.org/Arbed/>
+##OrigFileName:icare.xojo_binary_project
+##VaultHdrEnd#
+##Format:2#
+pWSe/B: 426C6F6B705753651704AFBB0000000000000000000000000000000000000000
+ Name/S: Session
+ Cont/N: 0
+ pasw/S: 
+ bCls/N: 1
+ Supr/S: WebSession
+ flag/N: 1
+ bNtr/N: 0
+ Comp/S: 
+ HIns/G: 
+  name/S: Open
+  Comp/S: 
+  Vsbl/N: 1
+  sorc/d: (Enco/N: 134217984
+		Sub Open()
+			'Make sure we can get to the database on disk
+			'Dim source As FolderItem
+			'source = GetFolderItem("Icare.sqlite")
+			'
+			'Session.db.DatabaseFile  = source
+			'
+			'If not Session.db.Connect Then
+			'MsgBox("Erreur: " + Session.db.ErrorMessage)
+			'End If
+			
+			Dim dbsql As dbIcare = dbIcare.OpenDB
+			
+			
+			If dbsql <> Nil Then
+				db = dbsql
+			End If
+			
+			
+		End Sub
+  )
+ HIns/g: 
+ Meth/G: 
+  name/S: sendMailProm
+  Comp/S: 
+  Vsbl/N: 1
+  Enco/N: 134217984
+  Alas/S: 
+  flag/N: 0
+  shrd/N: 0
+  parm/S: pNom As String, pMontant As String, pAnonyme As Boolean, pID As Integer, pMail As String
+  rslt/S: 
+  sorc/d: (Enco/N: 134217984
+		Sub sendMailProm(pNom As String, pMontant As String, pAnonyme As Boolean, pID As Integer, pMail As String)
+			Dim msg As New EmailMessage
+			Dim txt As String
+			Dim rsP As RecordSet
+			
+			rsP = Session.db.getProjet
+			
+			txt = trim(loadHTMLbody("mailmerci.txt"))
+			
+			txt = ReplaceAll(txt,"%nom%",trim(pNom))
+			txt = ReplaceAll(txt,"%montant%",trim(pMontant))
+			txt = ReplaceAll(txt,"%iban%",trim(rsP.Field("IBAN").StringValue))
+			txt = ReplaceAll(txt,"%bic%",trim(rsP.Field("BIC").StringValue))
+			txt = ReplaceAll(txt,"%beneficiaire%",trim(rsP.Field("Beneficiaire").StringValue))
+			txt = ReplaceAll(txt,"%communication%",trim(rsP.Field("CommPrefix").StringValue) + "-" + str(pID))
+			
+			' ---> changer à partir Projet, ajouter Expediteur dans Projet puis  msg.FromAddress = "Cie Hetre Urbain <olivier.colard@gmail.com>"
+			msg.AddRecipient (trim(pMail))
+			msg.subject = "La vie d'Icare - Merci pour votre promesse de don"
+			msg.BodyPlainText = txt
+			App.mailServer.Messages.Append  msg
+			App.mailServer.SendMail
+			
+		End Sub
+  )
+ Meth/g: 
+ Meth/G: 
+  name/S: loadHTML
+  Comp/S: 
+  Vsbl/N: 1
+  Enco/N: 134217984
+  Alas/S: 
+  flag/N: 0
+  shrd/N: 0
+  parm/S: viewer As WebHTMLViewer, filename As String
+  rslt/S: 
+  sorc/G: 
+   Enco/N: 134217984
+   srcl/S: Sub loadHTML(viewer As WebHTMLViewer, filename As String)
+   srcl/S: Dim File As FolderItem
+   srcl/S: 
+   srcl/S: 
+   srcl/S: #if DebugBuild then
+   srcl/S: File = GetFolderItem("").Parent.Child(filename)
+   srcl/S: #else
+   srcl/S: File = GetFolderItem("").Child(filename)
+   srcl/S: #endif
+   srcl/S: 
+   srcl/S: 
+   srcl/S: viewer.Visible = False
+   srcl/S: 
+   srcl/S: if File <> Nil and File.Exists then
+   srcl/S: dim t As TextInputStream
+   srcl/S: t = TextInputStream.Open(File)
+   srcl/S: viewer.LoadPage(t.ReadAll)
+   srcl/S: viewer.Visible = True
+   srcl/S: end if
+   srcl/S: 
+   srcl/S: 
+   srcl/S: End Sub
+  sorc/g: 
+ Meth/g: 
+ Meth/G: 
+  name/S: loadHTMLbody
+  Comp/S: 
+  Vsbl/N: 1
+  Enco/N: 134217984
+  Alas/S: 
+  flag/N: 0
+  shrd/N: 0
+  parm/S: filename As String
+  rslt/S: String
+  sorc/G: 
+   Enco/N: 134217984
+   srcl/S: Function loadHTMLbody(filename As String) As String
+   srcl/S: Dim File As FolderItem
+   srcl/S: 
+   srcl/S: 
+   srcl/S: #if DebugBuild then
+   srcl/S: File = GetFolderItem("").Parent.Child(filename)
+   srcl/S: #else
+   srcl/S: File = GetFolderItem("").Child(filename)
+   srcl/S: #endif
+   srcl/S: 
+   srcl/S: Dim t As TextInputStream
+   srcl/S: DIm txt As String
+   srcl/S: 
+   srcl/S: if File <> Nil and File.Exists then
+   srcl/S: t = TextInputStream.Open(File)
+   srcl/S: txt = t.ReadAll
+   srcl/S: end if
+   srcl/S: 
+   srcl/S: Return txt
+   srcl/S: 
+   srcl/S: End Function
+  sorc/g: 
+ Meth/g: 
+ Meth/G: 
+  name/S: sendMailPaym
+  Comp/S: 
+  Vsbl/N: 1
+  Enco/N: 134217984
+  Alas/S: 
+  flag/N: 0
+  shrd/N: 0
+  parm/S: pNom As String, pMontant As String, pMail As String
+  rslt/S: 
+  sorc/d: (Enco/N: 134217984
+		Sub sendMailPaym(pNom As String, pMontant As String, pMail As String)
+			Dim msg As New EmailMessage
+			Dim txt As String
+			Dim rsP As RecordSet
+			
+			rsP = Session.db.getProjet
+			
+			txt = trim(loadHTMLbody("mailpaye.txt"))
+			
+			txt = ReplaceAll(txt,"%nom%",trim(pNom))
+			txt = ReplaceAll(txt,"%montant%",trim(pMontant))
+			
+			
+			msg.AddRecipient (trim(pMail))
+			msg.subject = "La vie d'Icare - Merci pour votre don"
+			'msg.BodyHTML = txt
+			msg.BodyPlainText = txt
+			App.mailServer.Messages.Append  msg
+			App.mailServer.SendMail
+			
+		End Sub
+  )
+ Meth/g: 
+ Meth/G: 
+  name/S: sendMailRappel
+  Comp/S: 
+  Vsbl/N: 1
+  Enco/N: 134217984
+  Alas/S: 
+  flag/N: 0
+  shrd/N: 0
+  parm/S: pNom As String, pMontant As String,  pID As String, pMail As String, pDate As String, pBenef As String, pIBAN As String, pBIC As String, pComm As String
+  rslt/S: 
+  sorc/G: 
+   Enco/N: 134217984
+   srcl/S: Sub sendMailRappel(pNom As String, pMontant As String,  pID As String, pMail As String, pDate As String, pBenef As String, pIBAN As String, pBIC As String, pComm As String)
+   srcl/S: Dim msg As New EmailMessage
+   srcl/S: Dim txt As String
+   srcl/S: 
+   srcl/S: if trim(pMail) = "" then
+   srcl/S: 
+   srcl/S: #if DebugBuild then
+   srcl/S: pMail = "olivier@gate61.com"
+   srcl/S: #else
+   srcl/S: return
+   srcl/S: #endif
+   srcl/S: 
+   srcl/S: end if
+   srcl/S: 
+   srcl/S: 
+   srcl/S: 
+   srcl/S: txt = trim(loadHTMLbody("mailrappel.txt"))
+   srcl/S: 
+   srcl/S: txt = ReplaceAll(txt,"%nom%",trim(pNom))
+   srcl/S: txt = ReplaceAll(txt,"%date%",trim(pDate))
+   srcl/S: txt = ReplaceAll(txt,"%montant%",trim(pMontant))
+   srcl/S: txt = ReplaceAll(txt,"%iban%",trim(pIBAN))
+   srcl/S: txt = ReplaceAll(txt,"%bic%",trim(pBIC))
+   srcl/S: txt = ReplaceAll(txt,"%beneficiaire%",trim(pBenef))
+   srcl/S: txt = ReplaceAll(txt,"%communication%",trim(pComm))
+   srcl/S: 
+   srcl/S: 
+   srcl/S: msg.AddRecipient (trim(pMail))
+   srcl/S: msg.subject = "La vie d'Icare - Votre promesse de don"
+   srcl/S: msg.BodyPlainText = txt
+   srcl/S: App.mailServer.Messages.Append  msg
+   srcl/S: App.mailServer.SendMail
+   srcl/S: 
+   srcl/S: End Sub
+  sorc/g: 
+ Meth/g: 
+ Prop/G: 
+  name/S: db
+  Comp/S: 
+  Vsbl/N: 1
+  Enco/N: 134217984
+  decl/S: db As dbIcare
+  flag/N: 0
+  shrd/N: 0
+  sorc/d: (Enco/N: 134217984
+		db As dbIcare
+  )
+ Prop/g: 
+ Prop/G: 
+  name/S: totPromesse
+  Comp/S: 
+  Vsbl/N: 1
+  Enco/N: 134217984
+  decl/S: totPromesse As Integer
+  flag/N: 0
+  shrd/N: 0
+  sorc/d: (Enco/N: 134217984
+		totPromesse As Integer
+  )
+ Prop/g: 
+ Prop/G: 
+  name/S: totBudget
+  Comp/S: 
+  Vsbl/N: 1
+  Enco/N: 134217984
+  decl/S: totBudget As Integer
+  flag/N: 0
+  shrd/N: 0
+  sorc/d: (Enco/N: 134217984
+		totBudget As Integer
+  )
+ Prop/g: 
+ Prop/G: 
+  name/S: sAdmin
+  Comp/S: 
+  Vsbl/N: 1
+  Enco/N: 134217984
+  decl/S: sAdmin As Boolean
+  flag/N: 0
+  shrd/N: 0
+  sorc/d: (Enco/N: 134217984
+		sAdmin As Boolean
+  )
+ Prop/g: 
+ Prop/G: 
+  name/S: sUpdated
+  Comp/S: 
+  Vsbl/N: 1
+  Enco/N: 134217984
+  decl/S: sUpdated As Boolean
+  flag/N: 0
+  shrd/N: 0
+  sorc/d: (Enco/N: 134217984
+		sUpdated As Boolean
+  )
+ Prop/g: 
+ Prop/G: 
+  name/S: sID
+  Comp/S: 
+  Vsbl/N: 1
+  Enco/N: 134217984
+  decl/S: sID As String
+  flag/N: 0
+  shrd/N: 0
+  sorc/d: (Enco/N: 134217984
+		sID As String
+  )
+ Prop/g: 
+ VwBh/G: 
+  VwPr/D: (Name/S: ActiveConnectionCount, Vsbl/N: 1, PrGp/S: Behavior, type/S: Integer)
+  VwPr/D: (Name/S: BrowserVersion, PrGp/S: Behavior, type/S: String, vbET/S: MultiLineEditor)
+  VwPr/D: (Name/S: ConfirmMessage, PrGp/S: Behavior, type/S: String, vbET/S: MultiLineEditor)
+  VwPr/D: (Name/S: GMTOffset, PrGp/S: Behavior, type/S: Double)
+  VwPr/D: (Name/S: HashTag, Vsbl/N: 1, PrGp/S: Behavior, type/S: String, vbET/S: MultiLineEditor)
+  VwPr/D: (Name/S: HeaderCount, Vsbl/N: 1, PrGp/S: Behavior, type/S: Integer)
+  VwPr/D: (Name/S: Identifier, PrGp/S: Behavior, type/S: String, vbET/S: MultiLineEditor)
+  VwPr/D: (Name/S: Index, Vsbl/N: 1, PrGp/S: ID, PVal/S: -2147483648, type/S: Integer)
+  VwPr/D: (Name/S: LanguageCode, PrGp/S: Behavior, type/S: String, vbET/S: MultiLineEditor)
+  VwPr/D: (Name/S: LanguageRightToLeft, PrGp/S: Behavior, type/S: Boolean)
+  VwPr/D: (Name/S: Left, Vsbl/N: 1, PrGp/S: Position, PVal/S: 0, type/S: Integer)
+  VwPr/D: (Name/S: Name, Vsbl/N: 1, PrGp/S: ID, type/S: String)
+  VwPr/D: (Name/S: PageCount, PrGp/S: Behavior, type/S: Integer)
+  VwPr/D: (Name/S: Protocol, PrGp/S: Behavior, type/S: String, vbET/S: MultiLineEditor)
+  VwPr/D: (Name/S: RemoteAddress, PrGp/S: Behavior, type/S: String, vbET/S: MultiLineEditor)
+  VwPr/D: (Name/S: StatusMessage, PrGp/S: Behavior, type/S: String, vbET/S: MultiLineEditor)
+  VwPr/D: (Name/S: Super, Vsbl/N: 1, PrGp/S: ID, type/S: String)
+  VwPr/D: (Name/S: sAdmin, PrGp/S: Behavior, type/S: Boolean)
+  VwPr/D: (Name/S: sID, PrGp/S: Behavior, type/S: String, vbET/S: MultiLineEditor)
+  VwPr/D: (Name/S: sUpdated, PrGp/S: Behavior, type/S: Boolean)
+  VwPr/D: (Name/S: Timeout, PrGp/S: Behavior, type/S: Integer)
+  VwPr/D: (Name/S: Title, PrGp/S: Behavior, type/S: String, vbET/S: MultiLineEditor)
+  VwPr/D: (Name/S: Top, Vsbl/N: 1, PrGp/S: Position, PVal/S: 0, type/S: Integer)
+  VwPr/D: (Name/S: totBudget, PrGp/S: Behavior, type/S: Integer)
+  VwPr/D: (Name/S: totPromesse, PrGp/S: Behavior, type/S: Integer)
+  VwPr/D: (Name/S: URL, PrGp/S: Behavior, type/S: String, vbET/S: MultiLineEditor)
+  VwPr/D: (Name/S: _Expiration, PrGp/S: Behavior, PVal/S: -1, type/S: Double)
+ VwBh/g: 
+ Cnst/D: (name/S: ErrorDialogQuestion, Comp/S: , Vsbl/N: 1, Enco/N: 134217984, name/S: ErrorDialogQuestion, type/N: 0, defn/S: Please describe what you were doing right before the error occurred:, flag/N: 64)
+ Cnst/D: (name/S: ErrorDialogMessage, Comp/S: , Vsbl/N: 1, Enco/N: 134217984, name/S: ErrorDialogMessage, type/N: 0, defn/S: This application has encountered an error and cannot continue., flag/N: 64)
+ Cnst/D: (name/S: ErrorDialogSubmit, Comp/S: , Vsbl/N: 1, Enco/N: 134217984, name/S: ErrorDialogSubmit, type/N: 0, defn/S: Send, flag/N: 64)
+ Cnst/D: (name/S: ErrorDialogCancel, Comp/S: , Vsbl/N: 1, Enco/N: 134217984, name/S: ErrorDialogCancel, type/N: 0, defn/S: Do Not Send, flag/N: 64)
+ Cnst/D: (name/S: NoJavascriptMessage, Comp/S: , Vsbl/N: 1, Enco/N: 134217984, name/S: NoJavascriptMessage, type/N: 0, defn/S: Javascript must be enabled to access this page., flag/N: 64)
+ Cnst/G: 
+  name/S: NoJavascriptInstructions
+  Comp/S: 
+  Vsbl/N: 1
+  Enco/N: 134217984
+  name/S: NoJavascriptInstructions
+  type/N: 0
+  defn/S: To turn Javascript on, please refer to your browser settings window.
+  flag/N: 64
+ Cnst/g: 
+ Cnst/D: (name/S: ErrorThankYou, Comp/S: , Vsbl/N: 1, Enco/N: 134217984, name/S: ErrorThankYou, type/N: 0, defn/S: Thank You, flag/N: 64)
+ Cnst/D: (name/S: ErrorThankYouMessage, Comp/S: , Vsbl/N: 1, Enco/N: 134217984, name/S: ErrorThankYouMessage, type/N: 0, defn/S: Your feedback helps us make improvements., flag/N: 64)
+pWSe/b: 
+##RBvx-End#

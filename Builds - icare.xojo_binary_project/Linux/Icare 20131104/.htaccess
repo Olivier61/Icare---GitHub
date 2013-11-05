@@ -1,0 +1,8 @@
+SetEnv PHP_VER 5_3
+SetEnv REGISTER_GLOBALS 0
+Options +ExecCGI
+order allow,deny
+deny from all
+<Files *.cgi>
+allow from all
+</Files>
